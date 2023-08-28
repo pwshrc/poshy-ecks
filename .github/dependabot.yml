@@ -4,17 +4,19 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+
 registries:
-  nuget-psgallery:
+  psgallery:
     type: nuget-feed
-    url: https://www.powershellgallery.com/api/v2
+    url: https://www.powershellgallery.com/api/v2/index.json
     replaces-base: true
+
 updates:
-  - package-ecosystem: "nuget"
-    directory: "/"
-    registries:
-      - nuget-psgallery
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "⬆️ "
+- package-ecosystem: "nuget"
+  directory: "/"
+  registries:
+    - psgallery
+  schedule:
+    interval: "daily"
+  commit-message:
+    prefix: "⬆️ "
