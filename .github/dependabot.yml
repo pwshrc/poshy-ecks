@@ -9,6 +9,8 @@ registries:
   psgallery:
     type: nuget-feed
     url: https://www.powershellgallery.com/api/v2/index.json
+    username: ""
+    password: ""
     replaces-base: true
 
 updates:
