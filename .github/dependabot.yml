@@ -12,6 +12,8 @@ registries:
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
+    registries:
+      - nuget-psgallery
     schedule:
       interval: "daily"
     commit-message:
