@@ -5,19 +5,11 @@
 
 version: 2
 
-registries:
-  psgallery:
-    type: nuget-feed
-    url: https://www.powershellgallery.com/api/v2/index.json
-    username: ""
-    password: ""
-    replaces-base: true
-
 updates:
-- package-ecosystem: "nuget"
+
+# Maintain dependencies for GitHub Actions
+- package-ecosystem: "github-actions"
   directory: "/"
-  registries:
-    - psgallery
   schedule:
     interval: "daily"
   commit-message:
