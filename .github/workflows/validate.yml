@@ -69,10 +69,11 @@ jobs:
         commitMode: true
         outputFile: ./out/release-notes.md
     - name: "Create artifact: release-notes.md"
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-notes.md
         path: ./out/release-notes.md
+        if-no-files-found: error
 
   build-release-package:
     name: Build Release Package
@@ -110,15 +111,20 @@ jobs:
         path: ./out/
     - name: Build PSGallery package
       shell: pwsh
+      env:
+        PackageVersionNuGet: ${{ steps.gitversion_vars.outputs.NuGetVersionV2 }}
+        PackageVersionMajorMinorPatchBuild: ${{ steps.gitversion_vars.outputs.AssemblySemVer }}
+        PackageVersionPrereleaseTag: ${{ steps.gitversion_vars.outputs.PreReleaseTag }}
+        CommitSha: ${{ steps.gitversion_vars.outputs.Sha }}
       run: |
         [string] $releaseNotes = (Get-Content -Raw -Path ./out/release-notes.md -Encoding UTF8).Trim()
-        [object] $version = Get-Content -Raw -Path ./out/version.json -Encoding UTF8 | ConvertFrom-Json
-        ./build/package.ps1 -PackageVersionNuGet $version.NuGetVersionV2 -PackageVersionMajorMinorPatchBuild $version.AssemblySemVer -PackageVersionPrereleaseTag $version.PrereleaseTag -ReleaseNotes $releaseNotes -CommitSha $version.Sha
+        ./build/package.ps1 -PackageVersionNuGet $Env:PackageVersionNuGet -PackageVersionMajorMinorPatchBuild $Env:PackageVersionMajorMinorPatchBuild -PackageVersionPrereleaseTag $Env:PackageVersionPrereleaseTag -ReleaseNotes $releaseNotes -CommitSha $Env:CommitSha
     - name: "Create artifact: PSGallery-package"
       uses: actions/upload-artifact@v3
       with:
         name: PSGallery-package
         path: ./out/*.nupkg
+        if-no-files-found: error
 
   tests:
     name: Test with Pester on ${{ matrix.os }}
@@ -178,6 +184,7 @@ jobs:
       with:
         name: "tests-${{ matrix.os }}"
         path: ./out/*.xml
+        if-no-files-found: error
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3
       if: ${{ (github.ref == 'refs/heads/main') }}
