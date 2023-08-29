@@ -105,7 +105,7 @@ jobs:
       with:
         mode: 'download'
     - name: "Get artifact: release-notes.md"
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: release-notes.md
         path: ./out/
@@ -171,7 +171,7 @@ jobs:
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         ./build/restore.ps1
     - name: "Get artifact: PSGallery-package"
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: PSGallery-package
         path: ./out/
