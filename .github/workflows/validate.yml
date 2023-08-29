@@ -40,7 +40,7 @@ jobs:
     steps:
     - name: Populate GitVersion variables
       id: gitversion_vars
-      uses: pwshrc/actions-determine-version@v0.2.0
+      uses: pwshrc/actions-determine-version@v0.2.1
       with:
         mode: 'upload'
 
@@ -55,7 +55,7 @@ jobs:
         fetch-depth: 0  # create-release-notes requires the full history to create the release notes.
     - name: Populate GitVersion variables
       id: gitversion_vars
-      uses: pwshrc/actions-determine-version@v0.2.0
+      uses: pwshrc/actions-determine-version@v0.2.1
       with:
         mode: 'download'
     - name: Create release notes
@@ -101,7 +101,7 @@ jobs:
         ./build/restore.ps1
     - name: Populate GitVersion variables
       id: gitversion_vars
-      uses: pwshrc/actions-determine-version@v0.2.0
+      uses: pwshrc/actions-determine-version@v0.2.1
       with:
         mode: 'download'
     - name: "Get artifact: release-notes.md"
