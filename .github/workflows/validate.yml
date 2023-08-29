@@ -69,7 +69,7 @@ jobs:
         commitMode: true
         outputFile: ./out/release-notes.md
     - name: "Create artifact: release-notes.md"
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-notes.md
         path: ./out/release-notes.md
