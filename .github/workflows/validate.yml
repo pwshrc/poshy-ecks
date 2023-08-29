@@ -67,12 +67,12 @@ jobs:
         fromTag: ${{ steps.gitversion_vars.outputs.VersionSourceSha }}
         toTag: ${{ steps.gitversion_vars.outputs.Sha }}
         commitMode: true
-        outputFile: ./out/release-notes.md
+        outputFile: ./release-notes.md
     - name: "Create artifact: release-notes.md"
       uses: actions/upload-artifact@v3
       with:
         name: release-notes.md
-        path: ./out/release-notes.md
+        path: ./release-notes.md
         if-no-files-found: error
 
   build-release-package:
@@ -104,7 +104,6 @@ jobs:
       uses: pwshrc/actions-determine-version@v0.3.0
       with:
         mode: 'download'
-    - run: mkdir ./out
     - name: "Get artifact: release-notes.md"
       uses: actions/download-artifact@v2
       with:
