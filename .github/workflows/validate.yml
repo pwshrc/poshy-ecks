@@ -34,9 +34,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create release notes
-      uses: pwshrc/actions-create-release-notes@v0.5.0
+      uses: pwshrc/actions-create-release-notes@v0.6.0
       with:
         mode: 'upload'
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
 
   build-release-package:
     name: Build Release Package
@@ -52,9 +53,10 @@ jobs:
         mode: 'download'
     - name: Populate release notes
       id: get-releasenotes
-      uses: pwshrc/actions-create-release-notes@v0.5.0
+      uses: pwshrc/actions-create-release-notes@v0.6.0
       with:
         mode: 'download'
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
     - name: Build PSGallery package
       uses: pwshrc/actions-invoke-lib-dependent-pwsh@v0.2.2
       env:
