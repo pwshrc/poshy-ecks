@@ -3,7 +3,10 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
-# Execute a command in a specific directory
+<#
+.SYNOPSIS
+    Executes the specified script block in the specified directory.
+#>
 function xin {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
