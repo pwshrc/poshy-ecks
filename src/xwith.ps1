@@ -3,6 +3,10 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Executes the specified script block with the specified environment variables.
+#>
 function xwith {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
